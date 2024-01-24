@@ -1,5 +1,6 @@
+require("dotenv").config()
 let app = require("./app")
-let PORT = 400;
+let PORT =process.env.PORT || 500;
 
 
 app.listen(PORT, ()=>{
