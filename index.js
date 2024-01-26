@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const connectedDB = async () =>{
   try{
-    await mongoose.connect('mongodb://127.0.0.1:27017/test')
+    await mongoose.connect('mongodb://127.0.0.1:27017/productDB')
     console.log('server is connected');
   }catch(error){
     console.log('data is not connected');
