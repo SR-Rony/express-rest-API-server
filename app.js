@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require ("cors");
 const bodyParser = require("body-parser");
-const route = require("./routes/users.route");
+const userRoute = require("./routes/users.route");
+const productRoute =require("./routes/product.route")
 let app = express()
 
 app.use(cors());
@@ -14,7 +15,8 @@ app.get("/",(req,res)=>{
 });
 
 // user route 
-app.use("/users",route)
+app.use("/users",userRoute)
+app.use("/product",productRoute)
 
 // error rout 404
 
