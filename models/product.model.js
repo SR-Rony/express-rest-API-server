@@ -6,8 +6,18 @@ const productSchema = new mongoose.Schema({
       type:String,
       required:true
     },
-    price:Number,
-    description:String,
+    price:{
+      type:Number,
+      required:true
+    },
+    rating:{
+      type:Number,
+      required:true
+    },
+    description:{
+      type:String,
+      required:true
+    },
     createdAd:{
       type:Date,
       default:Date.now,

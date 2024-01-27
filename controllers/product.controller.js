@@ -3,7 +3,16 @@ const Product = require("../models/product.model")
 // get product
 const getProduct = async (req,res)=>{
   try{
-    const allProduct = await Product.find({price : {$lt:2000}})
+   let price = req.body.price;
+   let rating =  req.body.rating;
+
+   let allProduct;
+    if(price || rating){
+      allProduct = await Product.find({$or:[{price : {$gt:5000}},{rating : {$gt:4.4}}]})
+      .sort({price:1})
+    }else{
+     allProduct = await Product.find().sort({price:1})
+    }
     if(allProduct){
       res.status(200).send({
         success:true,
@@ -52,6 +61,7 @@ const postProduct = async(req,res)=>{
       const newProduct = new Product({
         title:req.body.title,
         price:req.body.price,
+        rating:req.body.rating,
         description:req.body.description,
       })
      const  newProductdata = await newProduct.save()
