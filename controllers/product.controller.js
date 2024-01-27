@@ -71,4 +71,60 @@ const postProduct = async(req,res)=>{
     }
   }
 
-module.exports ={getProduct,postProduct,getSingleProduct}
+// update product
+
+const updateProduct = async (req,res)=>{
+  try{
+    const id = req.params.id;
+    // const title = req.body.title
+    // const price = req.body.price
+    // const description = req.body.description
+   let productUpdate = await Product.findByIdAndUpdate(
+    {_id:id},
+    {$set : {
+      title:req.body.title,
+      price:req.body.price,
+      description:req.body.description
+    }},
+    {new:true})
+   if(productUpdate){
+    res.status(200).send({
+      success:true,
+      message: "product is update",
+      data:productUpdate
+    })
+   }else{
+    res.status(404).send({
+      success:false,
+      message:"product is not update",
+    })
+   }
+  }catch(error){
+    res.status(500).send(`server error ${error}`)
+  }
+}
+
+// delete product
+  const deleteProduct = async (req,res) =>{
+    try{
+     let id = req.params.id
+    let productDelete = await  Product.findByIdAndDelete({_id:id})
+      if(productDelete){
+        res.status(200).send({
+          success:true,
+          message:"product is delete",
+          data:productDelete
+        })
+      }else{
+        res.status(404).send({
+          success:false,
+          message:'product is not delete',
+        })
+      }
+
+    }catch(error){
+      res.status(500).send(`pages is not found ${error}`)
+    }
+  }
+
+module.exports ={getProduct,postProduct,getSingleProduct,deleteProduct,updateProduct}
