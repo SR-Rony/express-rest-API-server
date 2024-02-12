@@ -84,6 +84,7 @@ const updateProduct = async (req,res)=>{
     {$set : {
       title:req.body.title,
       price:req.body.price,
+      rating:req.body.rating,
       description:req.body.description
     }},
     {new:true})
